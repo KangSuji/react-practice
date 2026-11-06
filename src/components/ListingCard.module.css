@@ -1,0 +1,48 @@
+.list_card {
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 8px;
+  margin: 10px 0 10px;
+}
+.list_card.contracted {
+  opacity: 0.5;
+}
+.list_card:last-child {
+  margin-bottom: 0;
+}
+.title_area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #111111;
+}
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.badge {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 12px;
+}
+.building {
+  background-color: rgba(252, 132, 132, 0.5);
+}
+.office {
+  background-color: rgba(252, 132, 196, 0.5);
+}
+.store {
+  background-color: rgba(192, 132, 252, 0.5);
+}
+.badge.available {
+  background-color: #49e3297d;
+}
+.badge.contracted {
+  background-color: rgba(72, 72, 73, 0.3);
+}

@@ -1,3 +1,4 @@
+import { ListingCard } from "../components/ListingCard";
 import { useListings } from "../hooks/useListings";
 
 export function ListPage() {
@@ -9,11 +10,10 @@ export function ListPage() {
 
   return (
     <div>
-      <ul>
-        {data.items.map((item) => {
-          return <li key={item.id}>{item.title}</li>;
-        })}
-      </ul>
+      {data.items.map((item) => {
+        return <ListingCard key={item.id} listing={item} />;
+      })}
+
       <p>총 {data.total}</p>
     </div>
   );
