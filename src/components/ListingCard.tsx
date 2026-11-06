@@ -5,7 +5,7 @@ import type { Listing, ListingType } from "../types/listing";
 import { formatPrice } from "../utils/formats";
 import styles from "./ListingCard.module.css";
 
-const TYPE_CLASS: Record<ListingType, string> = {
+export const TYPE_CLASS: Record<ListingType, string> = {
   상가: "store",
   사무실: "office",
   건물: "building",

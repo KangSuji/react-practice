@@ -37,3 +37,17 @@ export interface Inquiry {
 }
 
 export type CreateInquiryInput = Omit<Inquiry, "id">;
+
+export type SortKey = "latest" | "rentAsc" | "areaDesc";
+
+export interface ListingFilters {
+  q: string;
+  type: ListingType | ""; // "" = 전체
+  region: string;
+  minRent: string;
+  maxRent: string;
+  sort: SortKey;
+}
+
+// types/listing.ts
+export type ListingsResponse = { items: Listing[]; total: number };

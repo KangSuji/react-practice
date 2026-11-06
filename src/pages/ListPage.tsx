@@ -1,20 +1,40 @@
-import { ListingCard } from "../components/ListingCard";
+import { useState } from "react";
 import { useListings } from "../hooks/useListings";
+import { FilterBar } from "../components/FilterBar";
+import type { ListingFilters } from "../types/listing";
+import { ListingList } from "../components/ListingList";
+import { useDebounce } from "../hooks/useDebounce";
+
+const INITIAL_FILTERS: ListingFilters = {
+  q: "",
+  type: "",
+  region: "",
+  minRent: "",
+  maxRent: "",
+  sort: "latest",
+};
 
 export function ListPage() {
-  const { data, isPending, isError } = useListings({ page: 1 });
+  const [filters, setFilters] = useState<ListingFilters>(INITIAL_FILTERS);
+  const [page, setPage] = useState(1);
 
-  if (isPending) return <h1>로딩중 ...</h1>;
-  if (isError) return <h4>에러 발생</h4>;
-  if (data.items.length < 1) return <h4>데이터 없음</h4>;
+  const debouncedQ = useDebounce(filters.q, 300);
+  const { data, isPending, isError } = useListings({
+    ...filters,
+    q: debouncedQ,
+    page,
+  });
+
+  const handleFilterChange = (next: ListingFilters) => {
+    setFilters(next);
+    setPage(1);
+  };
 
   return (
     <div>
-      {data.items.map((item) => {
-        return <ListingCard key={item.id} listing={item} />;
-      })}
-
-      <p>총 {data.total}</p>
+      <FilterBar filters={filters} onChange={handleFilterChange} />
+      <ListingList data={data} isPending={isPending} isError={isError} />
+      <p>총 {data?.total}</p>
     </div>
   );
 }
